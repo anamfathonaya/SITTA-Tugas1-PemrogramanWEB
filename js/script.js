@@ -83,15 +83,16 @@ function hapusSesi() {
 function isiInfoPengguna() {
   var user = getSesi();
   if (!user) {
-    // Jangan redirect jika sudah di halaman login
+    // Hanya redirect jika BUKAN di halaman login
     var halaman = window.location.pathname.split("/").pop();
     if (halaman !== "index.html" && halaman !== "") {
       window.location.href = "index.html";
     }
-    return;
+    return; // Stop di sini, jangan lanjut isi sidebar
   }
-  var elNama = document.getElementById("sidebar-nama");
-  var elRole = document.getElementById("sidebar-role");
+
+  var elNama   = document.getElementById("sidebar-nama");
+  var elRole   = document.getElementById("sidebar-role");
   var elAvatar = document.getElementById("sidebar-avatar");
   if (elNama)   elNama.textContent   = user.nama;
   if (elRole)   elRole.textContent   = user.role + " — " + user.lokasi;
