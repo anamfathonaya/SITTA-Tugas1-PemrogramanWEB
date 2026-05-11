@@ -82,9 +82,12 @@ function hapusSesi() {
  */
 function isiInfoPengguna() {
   var user = getSesi();
-  // Jika tidak ada sesi, arahkan ke halaman login
   if (!user) {
-    window.location.href = "index.html";
+    // Jangan redirect jika sudah di halaman login
+    var halaman = window.location.pathname.split("/").pop();
+    if (halaman !== "index.html" && halaman !== "") {
+      window.location.href = "index.html";
+    }
     return;
   }
   var elNama = document.getElementById("sidebar-nama");
